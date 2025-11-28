@@ -1,0 +1,7 @@
+---
+title: "HW5"
+output: html_document
+author: "Gianna Zinnen"
+date: "12-01-2025"
+---
+
