@@ -40,8 +40,13 @@ head(homicides)
 
 Baltimore <- homicides %>% 
   filter(city_name == "Baltimore, MD") %>%
-  mutate(Date = ymd(reported_date))
-
-
+  mutate(Date = ymd(reported_date)) %>%
+  mutate(Winter = month(Date) %in% c(11, 12, 1, 2, 3, 4)) %>%
+  mutate(Summer = month(Date) %in% c(5, 6, 7, 8, 9, 10)) %>%
+  mutate(Season = ifelse(Winter, "winter", "summer")) %>% 
+  group_by(month(Date)) %>%
+  mutate(Monthly_homicides = n()) 
+                               
+                               
 
 ```
