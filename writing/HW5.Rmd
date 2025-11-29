@@ -65,7 +65,8 @@ Baltimore %>%
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_dark() +
   geom_vline(xintercept = as.Date("2015-04-12"), linetype = "dashed", color = "red") + 
-  geom_text(aes(x = as.Date("2015-04-12"), y = 45, label = "Arrest of\nFreddie Gray"), hjust = -0.1, color = "white")
+  geom_text(aes(x = as.Date("2015-04-12"), y = 45, label = "Arrest of\nFreddie Gray"), hjust = -0.1, color = "white") +
+  geom_line(aes(x = Date, y = Monthly_homicides))
 
 
 ```
