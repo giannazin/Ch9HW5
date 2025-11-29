@@ -48,8 +48,7 @@ Baltimore <- homicides %>%
   mutate(Winter = Month %in% c(11, 12, 1, 2, 3, 4)) %>%
   mutate(Summer = Month %in% c(5, 6, 7, 8, 9, 10)) %>%
   mutate(Season = ifelse(Winter, "Winter", "Summer")) %>%
-  mutate(Date = paste(Year, Month, sep = "-"))
-  
+  mutate(Date = ym(paste(Year, Month)))
 
 ```
 
@@ -63,7 +62,10 @@ Baltimore %>%
   geom_col() +
   scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) +
   labs(x = "Date", y = "Monthly Homicides", title = "Homicides in Baltimore, MD") +
-  theme_minimal()
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme_dark() +
+  geom_vline(xintercept = as.Date("2015-04-12"), linetype = "dashed", color = "red") + 
+  geom_text(aes(x = as.Date("2015-04-12"), y = 45, label = "Arrest of\nFreddie Gray"), hjust = -0.1, color = "white")
 
 
 ```
