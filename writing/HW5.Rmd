@@ -42,7 +42,7 @@ Baltimore <- homicides %>%
   mutate(Date = ymd(reported_date)) %>%
   mutate(Winter = month(Date) %in% c(11, 12, 1, 2, 3, 4)) %>%
   mutate(Summer = month(Date) %in% c(5, 6, 7, 8, 9, 10)) %>%
-  mutate(Season = ifelse(Winter, "winter", "summer")) %>% 
+  mutate(Season = ifelse(Winter, "Winter", "Summer")) %>% 
   group_by(month(Date)) %>%
   mutate(Monthly_homicides = n()) 
 
@@ -52,10 +52,15 @@ Baltimore <- homicides %>%
 
 making the graph
 ```{r graph}
+
 Baltimore %>%
   select(Date, Season, Monthly_homicides) %>%
   ggplot(aes(x = Date, y = Monthly_homicides, fill = Season)) + 
-  geom_col() 
+  geom_col() +
+  scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) 
+
+
+
 
 ```
 
