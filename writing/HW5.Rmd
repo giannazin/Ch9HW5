@@ -39,28 +39,31 @@ head(homicides)
 
 Baltimore <- homicides %>% 
   filter(city_name == "Baltimore, MD") %>%
-  mutate(Date = ymd(reported_date)) %>%
-  mutate(Winter = month(Date) %in% c(11, 12, 1, 2, 3, 4)) %>%
-  mutate(Summer = month(Date) %in% c(5, 6, 7, 8, 9, 10)) %>%
-  mutate(Season = ifelse(Winter, "Winter", "Summer")) %>% 
-  group_by(month(Date)) %>%
-  mutate(Monthly_homicides = n()) 
-
+  mutate(Date = ymd(reported_date)) %>%  
+  mutate(Year = year(Date)) %>%
+  mutate(Month = month(Date)) %>%
+  group_by(Year, Month) %>%
+  summarize(Monthly_homicides = n(), .groups = 'drop') %>%
+  ungroup() %>%
+  mutate(Winter = Month %in% c(11, 12, 1, 2, 3, 4)) %>%
+  mutate(Summer = Month %in% c(5, 6, 7, 8, 9, 10)) %>%
+  mutate(Season = ifelse(Winter, "Winter", "Summer")) %>%
+  mutate(Date = paste(Year, Month, sep = "-"))
+  
 
 ```
 
 
 making the graph
-```{r graph}
+
+```{r graph fig.width = 4.5, fig.height = 8}
 
 Baltimore %>%
-  select(Date, Season, Monthly_homicides) %>%
   ggplot(aes(x = Date, y = Monthly_homicides, fill = Season)) + 
   geom_col() +
-  scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) 
-
-
+  scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) +
+  labs(x = "Date", y = "Monthly Homicides", title = "Homicides in Baltimore, MD") +
+  theme_minimal()
 
 
 ```
-
