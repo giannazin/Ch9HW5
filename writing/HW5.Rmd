@@ -27,7 +27,6 @@ library(purrr)
 ```
 
 
-# Setting up dataframe and proportion test:
 
 ```{r data set up, warning = FALSE}
 
@@ -46,7 +45,17 @@ Baltimore <- homicides %>%
   mutate(Season = ifelse(Winter, "winter", "summer")) %>% 
   group_by(month(Date)) %>%
   mutate(Monthly_homicides = n()) 
-                               
-                               
+
 
 ```
+
+
+making the graph
+```{r graph}
+Baltimore %>%
+  select(Date, Season, Monthly_homicides) %>%
+  ggplot(aes(x = Date, y = Monthly_homicides, fill = Season)) + 
+  geom_col() 
+
+```
+
