@@ -55,18 +55,21 @@ Baltimore <- homicides %>%
 
 making the graph
 
-```{r graph fig.width = 4.5, fig.height = 8}
+```{r graph fig.width = 4.5, fig.height = 8, warning=FALSE}
 
 Baltimore %>%
-  ggplot(aes(x = Date, y = Monthly_homicides, fill = Season)) + 
-  geom_col() +
+  ggplot(aes(x = Date, y = Monthly_homicides)) + 
+  geom_col(aes(fill = Season)) +
   scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) +
   labs(x = "Date", y = "Monthly Homicides", title = "Homicides in Baltimore, MD") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_dark() +
   geom_vline(xintercept = as.Date("2015-04-12"), linetype = "dashed", color = "red") + 
-  geom_text(aes(x = as.Date("2015-04-12"), y = 45, label = "Arrest of\nFreddie Gray"), hjust = -0.1, color = "white") +
-  geom_line(aes(x = Date, y = Monthly_homicides))
+  geom_text(aes(x = as.Date("2015-04-12"), y = 43, label = "Arrest of\nFreddie Gray"), hjust = -0.01, color = "white") +
+  geom_smooth(method = "loess", color = "blue", se = FALSE, size = 1) + 
+  theme(legend.position = "bottom", legend.justification = "center", legend.title = NULL)
+
+#need to fix trendline and add correct size
 
 
 ```
