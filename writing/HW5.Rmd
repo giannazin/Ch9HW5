@@ -65,14 +65,14 @@ Baltimore %>%
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_dark() +
   geom_vline(xintercept = as.Date("2015-04-12"), linetype = "dashed", color = "red") + 
-  geom_text(aes(x = as.Date("2015-04-12"), y = 43, label = "Arrest of\nFreddie Gray"), hjust = -0.01, color = "white") +
+  geom_text(aes(x = as.Date("2015-04-12"), y = 40, label = "Arrest of\nFreddie Gray"), hjust = 1.1, color = "grey", size = 3.2) +
   theme(legend.position = "bottom", legend.justification = "center", legend.title = NULL) +
-  #geom_line(color = "blue", size = 1) 
+  coord_fixed(ratio = 20) + 
   geom_smooth(method = "loess", color = "dodgerblue", se = FALSE, size = 1, span = 0.1) 
 
 
 
-#need to fix trendline and add correct size
+#correct size
 
 
 ```
