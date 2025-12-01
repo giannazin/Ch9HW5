@@ -60,16 +60,15 @@ making the graph
 Baltimore %>%
   ggplot(aes(x = Date, y = Monthly_homicides)) + 
   geom_col(aes(fill = Season)) +
-  scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue")) +
+  scale_fill_manual(values = c("Summer" = "lightgray", "Winter" = "lightblue"), name = NULL) +
   labs(x = "Date", y = "Monthly Homicides", title = "Homicides in Baltimore, MD") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   theme_dark() +
   geom_vline(xintercept = as.Date("2015-04-12"), linetype = "dashed", color = "red") + 
   geom_text(aes(x = as.Date("2015-04-12"), y = 40, label = "Arrest of\nFreddie Gray"), hjust = 1.1, color = "grey", size = 3.2) +
-  theme(legend.position = "bottom", legend.justification = "center", legend.title = NULL) +
+  theme(legend.position = "bottom", legend.justification = "center") +
   coord_fixed(ratio = 20) + 
   geom_smooth(method = "loess", color = "dodgerblue", se = FALSE, size = 1, span = 0.1) 
-
 
 
 #correct size
